@@ -3,7 +3,11 @@ import MovieCard from './Cards/MovieCard'
 
 const Home = () => {
   return (
-    <div>
+    <div className='flex'>
+      <MovieCard></MovieCard>
+      <MovieCard></MovieCard>
+      <MovieCard></MovieCard>
+      <MovieCard></MovieCard>
       <MovieCard></MovieCard>
     </div>
   )

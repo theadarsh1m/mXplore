@@ -21,28 +21,13 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function YourNameCard() {
+export default function MovieCard({ movie }) {
+  if(!movie) return null;
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => setExpanded(!expanded);
 
-  // Hardcoded data for Your Name
-  const movie = {
-    Title: "Your Name.",
-    Year: "2016",
-    imdbID: "tt5311514",
-    Type: "movie",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BMjI1ODZkYTgtYTY3Yy00ZTJkLWFkOTgtZDUyYWM4MzQwNjk0XkEyXkFqcGc@._V1_SX300.jpg",
-    Plot: "Ibe Riki and Riko Takeo are preparing for a wedding ceremony.",
-    Director: "Megumi Shiraishi",
-    Actors: "N/A",
-    Language: "Japanese",
-    Genre: "Short",
-    "imdbRating": "8.9",
-  };
-
   return (
-    <Card sx={{ maxWidth: 345, margin: 2 }}>
+    <Card sx={{ maxWidth: 200, margin: 2 }}>
       <CardHeader
         title={movie.Title}
         subheader={movie.Year}
@@ -93,11 +78,6 @@ export default function YourNameCard() {
           {movie.Genre && (
             <Typography sx={{ marginBottom: 1 }}>
               <strong>Genre:</strong> {movie.Genre}
-            </Typography>
-          )}
-          {movie.imdbID && (
-            <Typography sx={{ marginBottom: 1 }}>
-              <strong>IMDb ID:</strong> {movie.imdbID}
             </Typography>
           )}
           {movie.Type && (
