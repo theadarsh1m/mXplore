@@ -6,18 +6,18 @@ import MovieCard from "./Cards/MovieCard";
 import TextField from "@mui/material/TextField";
 
 const Navbar = () => {
-  const omdAPI_KEY = import.meta.env.VITE_omdAPI_KEY;
+  const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
   const [movieName, setMovieName] = useState("");
   const [results, setResults] = useState([]);
 
   async function getMovieName() {
     const movie = await axios.get(
-      `https://www.omdbapi.com/?s=${movieName}&apikey=${omdAPI_KEY}`
+      `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${movieName}&page=1`
     );
 
-    setResults(movie.data.Search);
-    console.log(movie.data.Search);
+    setResults(movie.data.results);
+    console.log(movie.data.results);
 
     console.log(movie.data);
   }
@@ -47,16 +47,18 @@ const Navbar = () => {
               getMovieName();
             }}
           >
-          <Search />
-
+            <Search />
             Search
           </button>
         </div>
       </form>
       <div className="flex flex-wrap justify-center mt-6">
-        {results.map((movie) => (
-          <MovieCard key={movie.imdbID} movie={movie} />
-        ))}
+        {results.map(
+          (movie) => (
+            (movie.poster_path = `https://image.tmdb.org/t/p/original${movie.poster_path}`),
+            (<MovieCard key={movie.id} movie={movie} />)
+          )
+        )}
       </div>
     </div>
   );

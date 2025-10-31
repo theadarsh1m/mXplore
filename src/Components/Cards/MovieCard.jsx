@@ -22,23 +22,25 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function MovieCard({ movie }) {
+
   if(!movie) return null;
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => setExpanded(!expanded);
 
   return (
+    console.log(movie),
     <Card sx={{ maxWidth: 200, margin: 2 }}>
       <CardHeader
-        title={movie.Title}
-        subheader={movie.Year}
+        title={movie.original_title}
+        subheader={movie.release_date}
       />
 
-      {movie.Poster && movie.Poster !== "N/A" && (
+      {movie.poster_path && movie.poster_path !== "N/A" && (
         <CardMedia
           component="img"
           height="300"
-          image={movie.Poster}
-          alt={movie.Title}
+          image={movie.poster_path}
+          alt={movie.original_title}
         />
       )}
 
@@ -55,14 +57,9 @@ export default function MovieCard({ movie }) {
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          {movie.Plot && (
+          {movie.overview && (
             <Typography sx={{ marginBottom: 1 }}>
-              <strong>Plot:</strong> {movie.Plot}
-            </Typography>
-          )}
-          {movie.Director && (
-            <Typography sx={{ marginBottom: 1 }}>
-              <strong>Director:</strong> {movie.Director}
+              <strong>Plot:</strong> {movie.overview}
             </Typography>
           )}
           {movie.Actors && movie.Actors !== "N/A" && (
@@ -85,9 +82,9 @@ export default function MovieCard({ movie }) {
               <strong>Type:</strong> {movie.Type}
             </Typography>
           )}
-          {movie.imdbRating && (
+          {movie.vote_average && (
             <Typography>
-              <strong>Imdb Rating:</strong> {movie.imdbRating}
+              <strong>Vote Average:</strong> {movie.vote_average}
             </Typography>
           )}
         </CardContent>
