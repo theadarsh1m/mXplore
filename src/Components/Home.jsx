@@ -25,9 +25,7 @@ const Home = () => {
       {trendingMovies.map(
         (trendingMovie) => (
           (trendingMovie.poster_path = `https://image.tmdb.org/t/p/original${trendingMovie.poster_path}`),
-          (
-            <MovieCard key={trendingMovie.id} movie={trendingMovie}></MovieCard>
-          )
+          (<MovieCard key={trendingMovie.id} movie={trendingMovie}></MovieCard>)
         )
       )}
     </div>
