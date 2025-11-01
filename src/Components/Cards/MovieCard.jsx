@@ -29,29 +29,29 @@ export default function MovieCard({ movie }) {
   const handleExpandClick = () => setExpanded(!expanded);
 
   return (
-    <Card 
-      sx={{ 
+    <Card
+      sx={{
         maxWidth: 300,
         margin: 2,
-        boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
-        transition: 'transform 0.3s ease-in-out',
-        '&:hover': {
-          transform: 'scale(1.02)'
-        }
+        boxShadow: "0 8px 16px rgba(0,0,0,0.1)",
+        transition: "transform 0.3s ease-in-out",
+        "&:hover": {
+          transform: "scale(1.02)",
+        },
       }}
     >
       <CardHeader
         title={movie.original_title}
         subheader={movie.release_date}
         sx={{
-          '& .MuiCardHeader-title': {
-            fontSize: '1.2rem',
-            fontWeight: 'bold',
-            color: '#1a237e'
+          "& .MuiCardHeader-title": {
+            fontSize: "1.2rem",
+            fontWeight: "bold",
+            color: "#1a237e",
           },
-          '& .MuiCardHeader-subheader': {
-            color: '#666'
-          }
+          "& .MuiCardHeader-subheader": {
+            color: "#666",
+          },
         }}
       />
 
@@ -62,30 +62,35 @@ export default function MovieCard({ movie }) {
           image={movie.poster_path}
           alt={movie.original_title}
           sx={{
-            objectFit: 'cover',
-            transition: 'transform 0.3s ease-in-out',
-            '&:hover': {
-              transform: 'scale(1.05)'
-            }
+            objectFit: "cover",
+            transition: "transform 0.3s ease-in-out",
+            "&:hover": {
+              transform: "scale(1.05)",
+            },
           }}
         />
       )}
 
-      <CardActions 
+      <CardActions
         disableSpacing
         sx={{
-          backgroundColor: '#f5f5f5',
-          borderTop: '1px solid #eee'
+          backgroundColor: "#f5f5f5",
+          borderTop: "1px solid #eee",
         }}
       >
-        <Typography 
+        <Typography
           variant="button"
-          sx={{ 
-            color: '#424242',
-            fontWeight: 500
+          sx={{
+            color: "#424242",
+            fontWeight: 500,
           }}
         >
-          Show More
+          <p
+            className="cursor-pointer hover:text-gray-900 transition duration-300 ease-in-out border-b-2 border-transparent hover:border-gray-900"
+            onClick={handleExpandClick}
+          >
+            Show More
+          </p>
         </Typography>
         <ExpandMore
           expand={expanded}
@@ -98,20 +103,21 @@ export default function MovieCard({ movie }) {
       </CardActions>
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent sx={{ backgroundColor: '#fafafa' }}>
+        <CardContent sx={{ backgroundColor: "#fafafa" }}>
           {movie.overview && (
             <Typography sx={{ marginBottom: 2, lineHeight: 1.6 }}>
               <strong>Plot:</strong> {movie.overview}
             </Typography>
           )}
           {movie.original_language && (
-            <Typography sx={{ marginBottom: 1.5, color: '#424242' }}>
+            <Typography sx={{ marginBottom: 1.5, color: "#424242" }}>
               <strong>Language:</strong>{" "}
-              {languageId[movie.original_language]?.name || movie.original_language}
+              {languageId[movie.original_language]?.name ||
+                movie.original_language}
             </Typography>
           )}
           {movie.genre_ids && (
-            <Typography sx={{ marginBottom: 1.5, color: '#424242' }}>
+            <Typography sx={{ marginBottom: 1.5, color: "#424242" }}>
               <strong>Genre:</strong>{" "}
               {movie.genre_ids
                 .map((genre) => (genre = genreId[Number(genre)]))
@@ -119,11 +125,11 @@ export default function MovieCard({ movie }) {
             </Typography>
           )}
           {movie.media_type && (
-            <Typography sx={{ marginBottom: 1.5, color: '#424242' }}>
+            <Typography sx={{ marginBottom: 1.5, color: "#424242" }}>
               <strong>Type:</strong> {movie.media_type}
             </Typography>
           )}
-          <Typography sx={{ color: '#424242' }}>
+          <Typography sx={{ color: "#424242" }}>
             <strong>Vote Average:</strong> {movie.vote_average || "N/A"}
           </Typography>
         </CardContent>
